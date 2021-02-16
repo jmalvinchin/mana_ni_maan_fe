@@ -7,8 +7,8 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
-import BakingSlots from "../components/baking-slot/BakingSlots"
-import Orders from "../components/orders/Orders"
+import { BakingSlots } from "../components/baking-slot"
+import { Orders } from "../components/orders"
 
 function Routes() {
   return (
