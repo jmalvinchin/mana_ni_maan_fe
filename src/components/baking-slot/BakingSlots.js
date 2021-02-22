@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"
+
 import { LIST_BAKING_SLOTS  } from "../../Api"
 import { useAuth, requestHeaders } from "../../AuthProvider"
 import Nav from "../common/Nav"
+import { PageContainer } from "../app"
 
 function BakingSlots() {
   const [slots, setSlots] = useState([])
@@ -16,8 +18,7 @@ function BakingSlots() {
   }, []);
 
   return (
-    <div className="box-border grid grid-cols-3">
-      <Nav />
+    <PageContainer>
       <div className="col-start-2 col-end-3">
         <h1>Baking Slots!</h1>
         <ul>
@@ -30,7 +31,7 @@ function BakingSlots() {
           }
         </ul>
       </div>
-    </div>
+    </PageContainer>
   );
 }
 
