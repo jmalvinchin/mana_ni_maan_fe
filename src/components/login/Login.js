@@ -1,19 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useHistory, useLocation, Redirect } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom"
 import { useAuth } from "../../AuthProvider"
 function Login() {
-  // const [
-  //   redirectToReferrer,
-  //   setRedirectToReferrer
-  // ] = useState(false)
-  //
-  // const { state } = useLocation()
-  // if (redirectToReferrer === true) {
-  //   return <Redirect to={state?.from || '/'} />
-  // }
-
   let history = useHistory();
   let location = useLocation();
   let auth = useAuth();
@@ -30,10 +20,6 @@ function Login() {
         auth.signin(values.email, values.password, () => {
           history.replace(from);
         })
-        // setTimeout(() => {
-        //   alert(JSON.stringify(values, null, 2));
-        //   setSubmitting(false);
-        // }, 400);
       }}
       >
        <Form>

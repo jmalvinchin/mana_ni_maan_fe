@@ -1,11 +1,7 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  useParams
 } from "react-router-dom";
 import { BakingSlots } from "../components/baking-slot"
 import { Orders } from "../components/orders"

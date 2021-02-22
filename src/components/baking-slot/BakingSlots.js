@@ -1,22 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios"
-import Api from "../../Api"
-import { useAuth } from "../../AuthProvider"
+import { LIST_BAKING_SLOTS  } from "../../Api"
+import { useAuth, requestHeaders } from "../../AuthProvider"
 
 function BakingSlots() {
   const [slots, setSlots] = useState([])
-  // const { headers } = useContext(AuthContext)
-  const auth = useAuth();
-  const formattedHeaders = {
-    "access-token": auth.headers.access_token,
-    "client": auth.headers.client,
-    "uid": auth.headers.uid,
-    "expiry": auth.headers.expiry,
-    "token-type": auth.headers.token_type
-  }
+  const headers = requestHeaders(useAuth().headers || {})
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/v1/baking_slots", { headers: {...formattedHeaders} } )
+    axios.get(LIST_BAKING_SLOTS, { headers: {...headers} } )
       .then(res => {
         setSlots(res.data);
       })
