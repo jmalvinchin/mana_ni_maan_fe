@@ -9,16 +9,21 @@ import {
 } from "react-router-dom";
 import { BakingSlots } from "../components/baking-slot"
 import { Orders } from "../components/orders"
+import Login from "../components/login/Login"
+import PrivateRoute from "../utils/PrivateRoute"
 
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/">
+      <PrivateRoute exact path="/">
         <BakingSlots />
+      </PrivateRoute>
+      <Route path="/login">
+        <Login />
       </Route>
-      <Route path="/orders">
+      <PrivateRoute path="/orders">
         <Orders />
-      </Route>
+      </PrivateRoute>
     </Switch>
   )
 }
