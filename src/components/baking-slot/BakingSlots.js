@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"
 import { LIST_BAKING_SLOTS  } from "../../Api"
 import { useAuth, requestHeaders } from "../../AuthProvider"
+import Nav from "../common/Nav"
 
 function BakingSlots() {
   const [slots, setSlots] = useState([])
@@ -16,6 +17,7 @@ function BakingSlots() {
 
   return (
     <div>
+      <Nav />
       <h1>Baking Slots!</h1>
       <ul>
         {

@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 import Routes from "../../routes/Routes"
-import Nav from "../common/Nav"
 import AuthProvider from "../../AuthProvider"
 
 function App() {
@@ -11,7 +10,6 @@ function App() {
     <AuthProvider>
       <Router>
         <div>
-          <Nav />
           <Routes />
         </div>
       </Router>
