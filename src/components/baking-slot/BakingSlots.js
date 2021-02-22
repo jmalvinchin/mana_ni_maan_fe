@@ -16,18 +16,20 @@ function BakingSlots() {
   }, []);
 
   return (
-    <div>
+    <div className="box-border grid grid-cols-3">
       <Nav />
-      <h1>Baking Slots!</h1>
-      <ul>
-        {
-          slots.map((slot) => {
-            return (
-              <li key={slot.id}>{slot.slot}</li>
-            )
-          })
-        }
-      </ul>
+      <div className="col-start-2 col-end-3">
+        <h1>Baking Slots!</h1>
+        <ul>
+          {
+            slots.map((slot) => {
+              return (
+                <li key={slot.id}>{slot.slot}</li>
+              )
+            })
+          }
+        </ul>
+      </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div>
+        <div >
           <Routes />
         </div>
       </Router>
