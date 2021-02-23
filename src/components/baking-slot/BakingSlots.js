@@ -1,35 +1,48 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useMemo } from "react";
 import axios from "axios"
 import { LIST_BAKING_SLOTS  } from "../../Api"
 import { useAuth, requestHeaders } from "../../AuthProvider"
 import { PageContainer } from "../app"
+import Table from "../common/Table"
 
 function BakingSlots() {
+  const [loading, setLoading] = useState(true)
   const [slots, setSlots] = useState([])
 
   const headers = requestHeaders(useAuth().headers || {})
+  const columns = useMemo(() => [
+    {
+      Header: "Slot",
+      accessor: "slot"
+    },
+    {
+      Header: "Allocation",
+      accessor: "slot_count",
+      Cell: props => {
+        return `${props.row.original.slot_count}/${props.row.original.max_slots}`
+      }
+    }
+  ], [])
 
   // Might have optimization issues since headers is an object
   useEffect(() => {
     axios.get(LIST_BAKING_SLOTS, { headers: {...headers} } )
       .then(res => {
         setSlots(res.data);
+        setLoading(false);
       })
   }, [headers]);
 
   return (
     <PageContainer>
       <Fragment>
-        <h1>Baking Slots!</h1>
-        <ul>
-          {
-            slots.map((slot) => {
-              return (
-                <li key={slot.id}>{slot.slot}</li>
-              )
-            })
-          }
-        </ul>
+        {
+          loading ? (
+            <p>Loading..</p>
+          ) : (
+            <Table columns={columns} data={slots} />
+          )
+        }
       </Fragment>
     </PageContainer>
   );

@@ -1,10 +1,14 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useMemo } from "react";
 import axios from "axios"
+import { useTable } from "react-table"
+
 import { LIST_ORDERS  } from "../../Api"
 import { useAuth, requestHeaders } from "../../AuthProvider"
 import { PageContainer } from "../app"
+import Table from "../common/Table"
 
 function Orders() {
+  const [loading, setLoading] = useState(true)
   const [orders, setOrders] = useState([])
   const headers = requestHeaders(useAuth().headers || {})
 
@@ -13,35 +17,36 @@ function Orders() {
     axios.get(LIST_ORDERS, { headers: {...headers} } )
       .then(res => {
         setOrders(res.data);
+        setLoading(false);
       })
   }, [headers]);
+
+  const columns = useMemo(() => [
+    {
+      Header: "Reference Code",
+      accessor: "reference_code"
+    },
+    {
+      Header: "Paid",
+      accessor: "paid"
+    },
+    {
+      Header: "Slot Count",
+      accessor: "slot_count"
+    }
+  ], []);
 
   return (
     <PageContainer>
       <Fragment>
         <h1>Orders!</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Reference Code</th>
-              <th>Paid</th>
-              <th>Slot Count</th>
-            </tr>
-          </thead>
-          <tbody>
-          {
-            orders.map((order) => {
-              return (
-                <tr key={order.id}>
-                  <td>{order.reference_code}</td>
-                  <td>{order.paid}</td>
-                  <td>{order.slot_count}</td>
-                </tr>
-              )
-            })
-          }
-          </tbody>
-        </table>
+        {
+          loading ? (
+            <p>Loading..</p>
+          ) : (
+            <Table columns={columns} data={orders} />
+          )
+        }
       </Fragment>
     </PageContainer>
   );
