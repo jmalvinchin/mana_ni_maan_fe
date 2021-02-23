@@ -28,15 +28,15 @@ function Orders() {
   const columns = useMemo(() => [
     {
       Header: "Reference Code",
-      accessor: "reference_code"
+      accessor: "reference_code",
     },
     {
       Header: "Paid",
-      accessor: "paid"
+      accessor: "paid",
     },
     {
       Header: "Slot Count",
-      accessor: "slot_count"
+      accessor: "slot_count",
     }
   ], []);
 
