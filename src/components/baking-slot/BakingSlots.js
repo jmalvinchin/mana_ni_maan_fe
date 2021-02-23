@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import axios from "axios"
-
 import { LIST_BAKING_SLOTS  } from "../../Api"
 import { useAuth, requestHeaders } from "../../AuthProvider"
-import Nav from "../common/Nav"
 import { PageContainer } from "../app"
 
 function BakingSlots() {
   const [slots, setSlots] = useState([])
+
   const headers = requestHeaders(useAuth().headers || {})
 
+  // Might have optimization issues since headers is an object
   useEffect(() => {
     axios.get(LIST_BAKING_SLOTS, { headers: {...headers} } )
       .then(res => {
         setSlots(res.data);
       })
-  }, []);
+  }, [headers]);
 
   return (
     <PageContainer>
-      <div className="col-start-2 col-end-3">
+      <Fragment>
         <h1>Baking Slots!</h1>
         <ul>
           {
@@ -30,7 +30,7 @@ function BakingSlots() {
             })
           }
         </ul>
-      </div>
+      </Fragment>
     </PageContainer>
   );
 }

@@ -30,7 +30,7 @@ function Login() {
              <ErrorMessage name="email" />
            </div>
 
-           <div clasName="m-4">
+           <div className="m-4">
              <label htmlFor="password" className="pr-12">Password</label>
              <Field name="password" type="password" className="border-2" placeholder="Password"/>
              <ErrorMessage name="password" />
