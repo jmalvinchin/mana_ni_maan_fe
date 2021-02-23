@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect, useMemo } from "react";
 import axios from "axios"
-import { useTable } from "react-table"
 
 import { LIST_ORDERS  } from "../../Api"
 import { useAuth, requestHeaders } from "../../AuthProvider"
@@ -14,11 +13,16 @@ function Orders() {
 
   // Might have optimization issues as header is an object
   useEffect(() => {
+    let mounted = true
     axios.get(LIST_ORDERS, { headers: {...headers} } )
       .then(res => {
-        setOrders(res.data);
-        setLoading(false);
+        if(mounted) {
+          setOrders(res.data);
+          setLoading(false);
+        }
       })
+
+    return () => ( mounted = false );
   }, [headers]);
 
   const columns = useMemo(() => [
