@@ -1,18 +1,13 @@
 import React, { Fragment, useState, useEffect, useMemo } from "react";
-import axios from "axios"
-import { LIST_BAKING_SLOTS  } from "../../Api"
-import { useAuth, requestHeaders } from "../../AuthProvider"
 import { PageContainer } from "../app"
-import Table from "../common/Table"
-import { getToken } from "../../utils/Token"
 import { listBakingSlots } from "../../Api"
+import Table from "../common/Table"
 
 function BakingSlots() {
   const [loading, setLoading] = useState(true)
   const [slots, setSlots] = useState([])
 
   // const headers = requestHeaders(useAuth().headers || {})
-  const headers = getToken()
   const columns = useMemo(() => [
     {
       Header: "Slot",

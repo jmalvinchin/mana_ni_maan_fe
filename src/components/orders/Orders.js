@@ -1,8 +1,4 @@
 import React, { Fragment, useState, useEffect, useMemo } from "react";
-import axios from "axios"
-
-import { LIST_ORDERS  } from "../../Api"
-import { useAuth, requestHeaders } from "../../AuthProvider"
 import { PageContainer } from "../app"
 import Table from "../common/Table"
 import { listOrders } from "../../Api"
@@ -10,7 +6,6 @@ import { listOrders } from "../../Api"
 function Orders() {
   const [loading, setLoading] = useState(true)
   const [orders, setOrders] = useState([])
-  const headers = requestHeaders(useAuth().headers || {})
 
   // Might have optimization issues as header is an object
   useEffect(() => {

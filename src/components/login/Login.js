@@ -1,17 +1,13 @@
 import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { useHistory, useLocation } from "react-router-dom"
-// import { useAuth } from "../../AuthProvider"
-
-import axios from "axios"
 import { setToken } from "../../utils/Token"
 import { signin } from "../../Api"
 
 function Login() {
   let history = useHistory();
   let location = useLocation();
-  // let auth = useAuth();
   let { from } = location.state || { from: { pathname: "/" } };
 
   return (
@@ -25,7 +21,6 @@ function Login() {
         onSubmit={(values, { setSubmitting }) => {
           signin(values.email, values.password).then((res) => {
             setToken(res.headers);
-            // createApiInstance();
             history.replace(from);
           })
         }}
