@@ -36,7 +36,7 @@ function BakingSlots() {
       })
 
     return () => ( mounted = false );
-  }, [headers]);
+  }, []);
 
   return (
     <PageContainer>

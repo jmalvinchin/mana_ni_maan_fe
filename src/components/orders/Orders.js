@@ -23,7 +23,7 @@ function Orders() {
       })
 
     return () => ( mounted = false );
-  }, [headers]);
+  }, []);
 
   const columns = useMemo(() => [
     {
