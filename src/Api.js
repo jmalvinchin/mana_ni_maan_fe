@@ -9,14 +9,16 @@ export const apiInstance = axios.create({
   headers: { "Content-Type": "application/json", ...getToken() }
 });
 
+const headers = getToken()
+
 export function signin(email, password) {
-  return axios.post(`/auth/sign_in`, { email: email, password: password })
+  return axios.post(`${BASE_URL}/auth/sign_in`, { email: email, password: password })
 }
 
 export function listBakingSlots() {
-  return apiInstance.get(`${API_URL}/baking_slots`)
+  return axios.get(`${API_URL}/baking_slots`, { headers: {...headers} })
 }
 
 export function listOrders() {
-  return apiInstance.get(`${API_URL}/orders`)
+  return axios.get(`${API_URL}/orders`, { headers: {...headers} })
 }
