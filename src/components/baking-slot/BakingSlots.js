@@ -4,12 +4,14 @@ import { LIST_BAKING_SLOTS  } from "../../Api"
 import { useAuth, requestHeaders } from "../../AuthProvider"
 import { PageContainer } from "../app"
 import Table from "../common/Table"
+import { getToken } from "../../utils/Token"
 
 function BakingSlots() {
   const [loading, setLoading] = useState(true)
   const [slots, setSlots] = useState([])
 
-  const headers = requestHeaders(useAuth().headers || {})
+  // const headers = requestHeaders(useAuth().headers || {})
+  const headers = getToken()
   const columns = useMemo(() => [
     {
       Header: "Slot",
@@ -27,6 +29,7 @@ function BakingSlots() {
   // Might have optimization issues since headers is an object
   useEffect(() => {
     let mounted = true
+    debugger
     axios.get(LIST_BAKING_SLOTS, { headers: {...headers} } )
       .then(res => {
         if(mounted) {

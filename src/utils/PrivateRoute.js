@@ -1,14 +1,18 @@
 import React from "react"
 import { useAuth } from "../AuthProvider"
 import { Route, Redirect } from "react-router-dom"
+import Cookies from "js-cookie"
+import { getToken, isAuthenticated } from "./Token"
 
 function PrivateRoute({ children, ...rest }) {
   let auth = useAuth();
+  // let token = Cookies.get("access-token");
+  let authenticated = isAuthenticated()
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        auth.headers.access_token ? (
+        authenticated ? (
           children
         ) : (
           <Redirect
