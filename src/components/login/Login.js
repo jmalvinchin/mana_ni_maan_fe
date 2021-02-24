@@ -2,15 +2,16 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useHistory, useLocation } from "react-router-dom"
-import { useAuth } from "../../AuthProvider"
+// import { useAuth } from "../../AuthProvider"
 
 import axios from "axios"
 import { setToken } from "../../utils/Token"
+import { signin } from "../../Api"
 
 function Login() {
   let history = useHistory();
   let location = useLocation();
-  let auth = useAuth();
+  // let auth = useAuth();
   let { from } = location.state || { from: { pathname: "/" } };
 
   return (
@@ -22,12 +23,9 @@ function Login() {
           password: Yup.string().required('Required'),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          // auth.signin(values.email, values.password, () => {
-          //   history.replace(from);
-          // })
-          axios.post("http://localhost:3000/auth/sign_in", { email: values.email, password: values.password}).then((res) => {
-            debugger
+          signin(values.email, values.password).then((res) => {
             setToken(res.headers);
+            // createApiInstance();
             history.replace(from);
           })
         }}

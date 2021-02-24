@@ -5,6 +5,7 @@ import { useAuth, requestHeaders } from "../../AuthProvider"
 import { PageContainer } from "../app"
 import Table from "../common/Table"
 import { getToken } from "../../utils/Token"
+import { listBakingSlots } from "../../Api"
 
 function BakingSlots() {
   const [loading, setLoading] = useState(true)
@@ -29,8 +30,8 @@ function BakingSlots() {
   // Might have optimization issues since headers is an object
   useEffect(() => {
     let mounted = true
-    debugger
-    axios.get(LIST_BAKING_SLOTS, { headers: {...headers} } )
+    // axios.get("http://localhost:3000/api/v1/baking_slots")
+    listBakingSlots()
       .then(res => {
         if(mounted) {
           setSlots(res.data);
