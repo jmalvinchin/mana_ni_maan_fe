@@ -31,7 +31,7 @@ function useAuthProvider() {
   const [headers, setHeaders] = useState({});
 
   const signin = (email, password, cb) => {
-    axios.post(LOGIN, {
+    axios.post("http://localhost:3000/auth/sign_in", {
       email: email,
       password: password
     }).then(res => {

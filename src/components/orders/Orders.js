@@ -5,6 +5,7 @@ import { LIST_ORDERS  } from "../../Api"
 import { useAuth, requestHeaders } from "../../AuthProvider"
 import { PageContainer } from "../app"
 import Table from "../common/Table"
+import { listOrders } from "../../Api"
 
 function Orders() {
   const [loading, setLoading] = useState(true)
@@ -14,7 +15,7 @@ function Orders() {
   // Might have optimization issues as header is an object
   useEffect(() => {
     let mounted = true
-    axios.get(LIST_ORDERS, { headers: {...headers} } )
+    listOrders()
       .then(res => {
         if(mounted) {
           setOrders(res.data);
