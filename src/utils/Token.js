@@ -1,5 +1,7 @@
 import Cookies from 'js-cookie'
 
+export const rootDomain = window.location.host.match(/localhost/) ? "localhost" : window.location.host
+
 export const getToken = () => {
   return {
     "access-token": Cookies.get("access-token"),
@@ -11,11 +13,11 @@ export const getToken = () => {
 }
 
 export const setToken = (headers) => {
-  Cookies.set("access-token", headers["access-token"]);
-  Cookies.set("client", headers["client"]);
-  Cookies.set("uid", headers["uid"]);
-  Cookies.set("expiry", headers["expiry"]);
-  Cookies.set("token-type", headers["token-type"]);
+  Cookies.set("access-token", headers["access-token"], { domain: rootDomain });
+  Cookies.set("client", headers["client"], { domain: rootDomain });
+  Cookies.set("uid", headers["uid"], { domain: rootDomain });
+  Cookies.set("expiry", headers["expiry"], { domain: rootDomain });
+  Cookies.set("token-type", headers["token-type"], { domain: rootDomain });
 }
 
 export const clearCookies = () => {
