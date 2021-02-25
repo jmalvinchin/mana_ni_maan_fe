@@ -2,7 +2,12 @@ import React from "react"
 import { useTable, useSortBy } from "react-table"
 
 function Table({columns, data}) {
-  const tableInstance = useTable({columns, data}, useSortBy)
+  const tableInstance = useTable({
+    columns,
+    data
+  },
+    useSortBy
+  )
   const {
     getTableProps,
     getTableBodyProps,
@@ -12,12 +17,12 @@ function Table({columns, data}) {
   } = tableInstance
 
   return(
-    <table {...getTableProps()}>
+    <table {...getTableProps()} className="w-full border-collapse">
       <thead>
         {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
+          <tr {...headerGroup.getHeaderGroupProps()} className="p-4">
             {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+              <th {...column.getHeaderProps(column.getSortByToggleProps())} className="border text-center m-4">
                 {column.render("Header")}
                 <span>
                   {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
@@ -33,7 +38,7 @@ function Table({columns, data}) {
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                return <td {...cell.getCellProps()} className="border text-center">{cell.render("Cell")}</td>;
               })}
             </tr>
           );

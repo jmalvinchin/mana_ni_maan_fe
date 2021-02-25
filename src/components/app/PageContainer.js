@@ -5,7 +5,7 @@ function PageContainer({ children }) {
   return (
     <div className="box-border grid grid-cols-3 m-10">
       <Nav />
-      <div className="col-start-2 col-end-3">
+      <div className="col-start-2 col-end-4">
         {children}
       </div>
     </div>
